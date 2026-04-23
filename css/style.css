@@ -967,36 +967,20 @@ ul {
 /* CTA Banner */
 .cta-banner {
   position: relative;
-  padding: 6rem 0;
+  padding: 4rem 0; /* Reduced section size */
   text-align: center;
-  background-image: url('C:/Users/USER/.gemini/antigravity/brain/2c50ef37-abab-4f31-b1d5-cb3f42975e81/portfolio_1_1776881893476.png');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
+  background-color: var(--color-green-primary);
   color: var(--color-white);
 }
 
-.cta-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 34, 19, 0.85);
-}
-
-.relative {
-  position: relative;
-  z-index: 1;
-}
-
 .cta-banner h2 {
-  font-size: 3rem;
+  font-family: var(--font-secondary);
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
 .cta-banner p {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   margin-bottom: 2rem;
   opacity: 0.9;
 }
