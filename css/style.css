@@ -1148,6 +1148,7 @@ ul {
   .footer-top { grid-template-columns: 1fr 1fr; }
   .services-premium-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .news-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
   .testimonial-card { width: 350px; }
 }
 
@@ -1198,10 +1199,9 @@ ul {
   .process-section .wrapper { width: auto; }
   .demo-text .text { font-size: clamp(2.5rem, 10vw, 4rem); }
 
-  /* Services Grid */
+  /* Grids */
   .services-premium-grid { grid-template-columns: 1fr; gap: 2rem; }
-  
-  /* Team Grid */
+  .news-grid { grid-template-columns: 1fr; gap: 2rem; }
   .team-grid { grid-template-columns: 1fr; gap: 2rem; }
   .team-img { height: 300px; }
 
