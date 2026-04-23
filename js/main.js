@@ -413,39 +413,67 @@ function initProcessAnimation() {
     const wrappers = gsap.utils.toArray(".demo-gallery .wrapper");
     const maxScrollDistance = Math.max(...wrappers.map(w => w.scrollWidth - window.innerWidth));
 
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: processSection,
-        start: "center center",
-        end: () => "+=" + Math.max(maxScrollDistance, 1000), // Responsive distance, min 1000px
-        scrub: 1,
-        pin: true,
-        anticipatePin: 1,
-        toggleClass: { targets: ".navbar", className: "nav-hidden" }
-      }
-    });
+    let mm = gsap.matchMedia();
 
-    gsap.utils.toArray(".demo-gallery").forEach((section, index) => {
-      const wrapper = section.querySelector(".wrapper");
+    // Desktop Animation (Pin & Scrub)
+    mm.add("(min-width: 769px)", () => {
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: processSection,
+          start: "center center",
+          end: () => "+=" + Math.max(maxScrollDistance, 1000), // Responsive distance, min 1000px
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          toggleClass: { targets: ".navbar", className: "nav-hidden" }
+        }
+      });
 
-      const maxScroll = wrapper.scrollWidth - section.offsetWidth;
-      
-      const [xStart, xEnd] =
-        index % 2
-          ? [0, -maxScroll] // Row 2 (index 1): Move Left
-          : [-maxScroll, 0]; // Row 1 (index 0): Move Right
+      gsap.utils.toArray(".demo-gallery").forEach((section, index) => {
+        const wrapper = section.querySelector(".wrapper");
+        const maxScroll = wrapper.scrollWidth - section.offsetWidth;
+        
+        const [xStart, xEnd] =
+          index % 2
+            ? [0, -maxScroll] // Row 2 (index 1): Move Left
+            : [-maxScroll, 0]; // Row 1 (index 0): Move Right
 
-      tl.fromTo(
-        wrapper,
-        { x: xStart },
-        {
-          x: xEnd,
-          ease: "none"
-        },
-        0 // All rows animate simultaneously
-      );
+        tl.fromTo(
+          wrapper,
+          { x: xStart },
+          { x: xEnd, ease: "none" },
+          0 // All rows animate simultaneously
+        );
+      });
     });
   };
+
+  // Mobile Menu Toggle Logic
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  const navLinks = document.querySelector(".nav-links");
+  
+  if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      const icon = mobileMenuBtn.querySelector("i");
+      if (navLinks.classList.contains("active")) {
+        icon.classList.remove("ph-list");
+        icon.classList.add("ph-x");
+      } else {
+        icon.classList.remove("ph-x");
+        icon.classList.add("ph-list");
+      }
+    });
+    
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        const icon = mobileMenuBtn.querySelector("i");
+        icon.classList.remove("ph-x");
+        icon.classList.add("ph-list");
+      });
+    });
+  }
 
   // wait for images load
   imagesLoaded(images)

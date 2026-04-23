@@ -1140,26 +1140,77 @@ ul {
 }
 
 /* Responsive Design */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .hero-title { font-size: 3.5rem; }
   .overview-grid { grid-template-columns: 1fr; gap: 3rem; }
   .overview-visual { min-height: 400px; }
   .contact-wrapper { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .services-premium-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
   .testimonial-card { width: 350px; }
 }
 
 @media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none; }
-  .mobile-menu-btn { display: block; }
-  .hero-title { font-size: 2.5rem; }
-  .boxes-wrapper { height: 50vh; }
-  .box { width: 220px; height: 300px; }
-  .services-premium-grid { grid-template-columns: 1fr; }
-  .testimonial-card { width: 300px; padding: 2rem 1.5rem; }
+  /* Global Fixes */
+  body, html { overflow-x: hidden; width: 100%; position: relative; }
+  .section-padding { padding: 3rem 0; }
+  
+  /* Navbar / Mobile Menu */
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: block; z-index: 2000; }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80vw;
+    height: 100vh;
+    background: var(--color-green-dark);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.4s ease;
+    z-index: 1000;
+  }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 1.5rem; }
+
+  /* Hero Section */
+  .hero-title { font-size: clamp(2.5rem, 8vw, 3.5rem); line-height: 1.2; }
+  .hero-subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
+  .hero-content { align-items: flex-start; text-align: left; }
+  
+  /* Portfolio (Native Swipe on Mobile) */
+  .process-section { padding-top: 2rem; padding-bottom: 2rem; }
+  .demo-wrapper { overflow-x: visible; }
+  .demo-gallery { 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    -webkit-overflow-scrolling: touch; 
+    padding: 1rem 0; 
+  }
+  .demo-gallery::-webkit-scrollbar { display: none; }
+  .demo-gallery li { 
+    width: 85vw; 
+    scroll-snap-align: center; 
+    padding-right: 1rem; 
+  }
+  .process-section .wrapper { width: auto; }
+  .demo-text .text { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+  /* Services Grid */
+  .services-premium-grid { grid-template-columns: 1fr; gap: 2rem; }
+  
+  /* Team Grid */
   .team-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .team-img { height: 350px; }
+  .team-img { height: 300px; }
+
+  /* Footer */
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  
+  /* General elements */
+  .boxes-wrapper { height: 50vh; }
+  .box { width: 220px; height: 300px; }
+  .testimonial-card { width: 300px; padding: 2rem 1.5rem; }
 }
