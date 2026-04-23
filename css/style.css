@@ -1123,6 +1123,44 @@ ul {
   gap: 1.5rem;
 }
 
+/* Ongoing Projects (Horizontal Scroll) */
+.ongoing-projects {
+  overflow: hidden;
+  background-color: var(--color-white);
+}
+
+.ongoing-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ongoing-container {
+  display: flex;
+  height: 60vh;
+  padding: 0 5vw;
+}
+
+.ongoing-panel {
+  flex-shrink: 0;
+  width: 60vw;
+  height: 100%;
+  margin-right: 4vw;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+.ongoing-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .hero-title { font-size: 3.5rem; }
@@ -1182,6 +1220,22 @@ ul {
   }
   .process-section .wrapper { width: auto; }
   .demo-text .text { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+  /* Ongoing Projects Mobile */
+  .ongoing-wrapper { height: auto; padding: 2rem 0; }
+  .ongoing-container {
+    height: 40vh;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 1rem;
+  }
+  .ongoing-container::-webkit-scrollbar { display: none; }
+  .ongoing-panel {
+    width: 85vw;
+    margin-right: 1rem;
+    scroll-snap-align: center;
+  }
 
   /* Grids */
   .services-premium-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
