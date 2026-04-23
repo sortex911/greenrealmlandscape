@@ -1200,7 +1200,12 @@ ul {
   .demo-text .text { font-size: clamp(2.5rem, 10vw, 4rem); }
 
   /* Grids */
-  .services-premium-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .services-premium-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .services-premium-card { padding: 1.5rem 1rem; }
+  .service-icon-circle { width: 60px; height: 60px; margin-bottom: 1rem; }
+  .service-icon-circle i { font-size: 1.8rem; }
+  .service-title { font-size: 1rem; margin-bottom: 0.5rem; }
+  .service-desc { font-size: 0.8rem; line-height: 1.4; }
   .news-grid { grid-template-columns: 1fr; gap: 2rem; }
   .team-grid { grid-template-columns: 1fr; gap: 2rem; }
   .team-img { height: 300px; }
