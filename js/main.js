@@ -380,10 +380,11 @@ function initTestimonialAnimations() {
     duration: 0.8,
     ease: "power3.out"
   })
-  .to(".testimonial-card-animate", {
+  .to(".testimonial-item", {
     y: 0,
     opacity: 1,
     duration: 0.8,
+    stagger: 0.2,
     ease: "power3.out"
   }, "-=0.4");
 }
