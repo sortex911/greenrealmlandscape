@@ -10,48 +10,50 @@
   * { cursor: none !important; }
 }
 
-.cursor-dot {
+/* Ring: the outer circle that follows smoothly */
+.cursor-ring {
   position: fixed;
-  top: 0; left: 0;
-  width: 8px;
-  height: 8px;
-  background: var(--color-gold, #c9a84c);
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
+  /* GSAP will handle the transform, but we pre-center it */
   transform: translate(-50%, -50%);
   will-change: transform;
-  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.25s ease, height 0.25s ease,
+              border-color 0.25s ease, background 0.25s ease;
   mix-blend-mode: difference;
 }
 
-.cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+/* Dot: absolutely centered inside the ring */
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
   border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  mix-blend-mode: difference;
+  flex-shrink: 0;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
 }
 
-/* Hover state */
-.cursor-dot.cursor-hover {
-  width: 12px;
-  height: 12px;
-  background: #fff;
-}
-
+/* ---- Hover state ---- */
 .cursor-ring.cursor-hover {
-  width: 54px;
-  height: 54px;
-  border-color: var(--color-gold, #c9a84c);
-  background: rgba(201, 168, 76, 0.08);
+  width: 58px;
+  height: 58px;
+  border-color: #c9a84c;
+  background: rgba(201, 168, 76, 0.12);
+}
+
+.cursor-ring.cursor-hover .cursor-dot {
+  width: 10px;
+  height: 10px;
+  background: #c9a84c;
 }
 
 
