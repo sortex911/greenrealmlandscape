@@ -65,8 +65,13 @@ body {
   font-family: var(--font-primary);
   color: var(--color-charcoal);
   background-color: var(--color-white);
+  transition: background-color 0.5s ease;
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+body.bg-beige {
+  background-color: #F4F2EC !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -895,98 +900,243 @@ ul {
   opacity: 0.8;
 }
 
-/* Testimonials Section */
-.testimonials-list {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-}
-
-.testimonial-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  opacity: 0;
-  transform: translateY(40px);
-  will-change: transform, opacity;
-}
-
-.testimonial-text-v2 {
-  font-family: var(--font-secondary);
-  font-size: 1.5rem;
-  line-height: 1.6;
-  color: var(--color-green-dark);
-  font-weight: 400;
-  max-width: 900px;
-}
-
-.testimonial-author-v2 {
+/* Premium Testimonials Section */
+.testimonials-premium {
+  background-color: #F4F2EC; /* Light beige */
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
-.author-photo-wrapper {
+.testimonials-premium .container {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 5vw !important;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Fixed width for timeline on the left */
+  gap: 5vw;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* LEFT: Timeline */
+.testimonials-timeline {
+  position: sticky;
+  top: 25vh;
+  display: flex;
+  justify-content: center;
+  grid-column: 1; /* Explicitly first column */
+}
+
+.timeline-track {
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  width: 2px;
+  background: rgba(26, 26, 26, 0.1);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #2F5D3A; /* Deep green */
+  transition: height 0.1s linear;
+}
+
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
   position: relative;
+  z-index: 2;
+  align-items: flex-start;
+}
+
+.timeline-item {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  opacity: 0.3;
+  transform: scale(0.8);
+}
+
+.timeline-item.active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.profile-img-wrapper {
   width: 100px;
   height: 100px;
-  flex-shrink: 0;
+  border-radius: 50%;
+  padding: 5px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+  position: relative;
 }
 
-.author-img-v2 {
+.timeline-item.active .profile-img-wrapper {
+  box-shadow: 0 0 20px rgba(47, 93, 58, 0.3);
+  border: 2px solid #2F5D3A;
+}
+
+.profile-img-wrapper img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  background: var(--color-beige-light);
 }
 
-.author-badge {
+/* RIGHT: Content */
+.testimonials-content {
+  padding-left: 2rem;
+}
+
+.premium-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #2F5D3A;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.testimonial-cards {
+  position: relative;
+  height: 500px; /* Increased height to fit long text */
+}
+
+.testimonial-card {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #f38d1c; /* Orange color from screenshot */
-  color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(50px);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, opacity;
+}
+
+.testimonial-card.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.quote-icon {
+  font-size: 2.5rem;
+  color: #2F5D3A;
+  opacity: 0.2;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #1A1A1A;
+  margin-bottom: 1.5rem;
+}
+
+.author-name {
+  font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
-  border: 3px solid white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.author-name-v2 {
-  font-family: var(--font-secondary);
-  font-size: 2.2rem;
-  color: var(--color-green-dark);
   font-weight: 700;
-  white-space: nowrap;
+  color: #1A1A1A;
+  position: relative;
+  display: inline-block;
+  padding-left: 40px;
 }
 
-/* Responsiveness for new Testimonials */
+.author-name::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  background: #2F5D3A;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .testimonial-quote {
+    font-size: 1.8rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .testimonial-text-v2 {
-    font-size: 1.25rem;
+  .testimonials-premium {
+    padding: 4rem 0;
   }
-  .author-name-v2 {
-    font-size: 1.6rem;
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
-  .author-photo-wrapper {
-    width: 80px;
-    height: 80px;
+
+  .testimonials-timeline {
+    position: relative;
+    top: 0;
+    padding-right: 0;
+    margin-bottom: 2rem;
   }
-  .author-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 1rem;
+
+  .timeline-items {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .timeline-track {
+    display: none;
+  }
+
+  .testimonials-content {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .testimonial-cards {
+    height: auto;
+    min-height: 450px;
+  }
+
+  .testimonial-card {
+    position: relative;
+    transform: translateY(30px);
+    opacity: 1;
+    visibility: visible;
+    margin-bottom: 4rem;
+  }
+
+  .testimonial-card:not(.active) {
+    /* On mobile, we might want to show all instead of pin-scrub, 
+       or we can keep the GSAP logic but adjust the layout.
+       For now, let's keep it visible in a stack if GSAP is disabled/mobile. */
+  }
+
+  .author-name {
+    padding-left: 0;
+  }
+
+  .author-name::before {
+    display: none;
   }
 }
 

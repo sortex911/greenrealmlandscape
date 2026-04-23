@@ -364,29 +364,74 @@ function initOverviewAnimations() {
 
 // Testimonials Animations
 function initTestimonialAnimations() {
-  const testimonialsSection = document.getElementById("testimonials");
-  if (!testimonialsSection) return;
+  const section = document.querySelector('.testimonials-premium');
+  if (!section) return;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: testimonialsSection,
-      start: "top 75%",
-    }
+  const items = gsap.utils.toArray('.timeline-item');
+  const cards = gsap.utils.toArray('.testimonial-card');
+  const progressLine = document.querySelector('.timeline-progress');
+
+  let mm = gsap.matchMedia();
+
+  mm.add("(min-width: 769px)", () => {
+    // Initial states
+    gsap.set(items.slice(1), { opacity: 0.3, scale: 0.8 });
+    gsap.set(cards.slice(1), { opacity: 0, x: 50, autoAlpha: 0 });
+    gsap.set(items[0], { opacity: 1, scale: 1.2 });
+    gsap.set(cards[0], { opacity: 1, x: 0, autoAlpha: 1 });
+
+    const mainTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=300%",
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        toggleClass: { targets: "body", className: "bg-beige" }
+      }
+    });
+
+    // Progress line fills entire duration
+    mainTl.to(progressLine, { height: "100%", ease: "none" }, 0);
+
+    // Duration of each transition relative to total scroll
+    const totalItems = items.length;
+    
+    items.forEach((item, i) => {
+      if (i > 0) {
+        const startTime = (i / totalItems);
+
+        // Previous item & card OUT
+        mainTl.to(items[i-1], { 
+          opacity: 0.3, 
+          scale: 0.8, 
+          duration: 0.1 
+        }, startTime);
+        
+        mainTl.to(cards[i-1], { 
+          opacity: 0, 
+          x: -50, 
+          autoAlpha: 0,
+          duration: 0.1 
+        }, startTime);
+
+        // Current item & card IN
+        mainTl.to(item, { 
+          opacity: 1, 
+          scale: 1.2, 
+          duration: 0.1 
+        }, startTime);
+        
+        mainTl.to(cards[i], { 
+          opacity: 1, 
+          x: 0, 
+          autoAlpha: 1,
+          duration: 0.1 
+        }, startTime);
+      }
+    });
   });
-
-  tl.to(".testimonial-header-animate", {
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    ease: "power3.out"
-  })
-  .to(".testimonial-item", {
-    y: 0,
-    opacity: 1,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "power3.out"
-  }, "-=0.4");
 }
 
 // CodePen Process Timeline Animations
