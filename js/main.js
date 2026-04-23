@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initPortfolioScroller();
   initOverviewAnimations();
   initProcessAnimation();
-  initOngoingProjectsAnimation();
   initTeamAnimations();
   initTestimonialAnimations();
 });
@@ -480,33 +479,4 @@ function initProcessAnimation() {
   imagesLoaded(images)
     .on("progress", updateProgress)
     .on("always", showDemo);
-}
-
-// Ongoing Projects Horizontal Scroll Animation
-function initOngoingProjectsAnimation() {
-  const ongoingSection = document.getElementById("ongoing");
-  const track = document.querySelector(".ongoing-container");
-  
-  if (!ongoingSection || !track) return;
-
-  let mm = gsap.matchMedia();
-
-  // Desktop Animation (Pin & scrub horizontally)
-  mm.add("(min-width: 769px)", () => {
-    // Calculate how far to move the track left
-    const getScrollAmount = () => track.scrollWidth - window.innerWidth;
-
-    gsap.to(track, {
-      x: () => -getScrollAmount(),
-      ease: "none",
-      scrollTrigger: {
-        trigger: ongoingSection,
-        start: "center center",
-        end: () => `+=${getScrollAmount()}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true
-      }
-    });
-  });
 }
