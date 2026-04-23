@@ -158,10 +158,20 @@ ul {
   pointer-events: none;
 }
 
-.navbar.scrolled .logo-text,
+.navbar.scrolled .logo-green,
+.navbar.scrolled .logo-realm,
 .navbar.scrolled .nav-links a,
 .navbar.scrolled .mobile-menu-btn {
   color: var(--color-green-dark);
+}
+
+.navbar.scrolled .logo-sub {
+  color: var(--color-green-dark);
+  opacity: 0.7;
+}
+
+.navbar.scrolled .logo-plus {
+  color: var(--color-gold);
 }
 
 .nav-container {
@@ -176,15 +186,47 @@ ul {
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  font-family: var(--font-secondary);
-  color: var(--color-white);
+  cursor: pointer;
 }
 
-.logo-icon {
+.logo-text-stack {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 1px;
+}
+
+.logo-green {
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.logo-plus {
   color: var(--color-gold);
+  font-weight: 400;
+}
+
+.logo-realm {
+  font-family: var(--font-secondary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-white);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.logo-sub {
+  font-family: var(--font-primary);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
 }
 
 .nav-links {
