@@ -5,6 +5,56 @@
   box-sizing: border-box;
 }
 
+/* ===== CUSTOM CURSOR ===== */
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--color-gold, #c9a84c);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+/* Hover state */
+.cursor-dot.cursor-hover {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+}
+
+.cursor-ring.cursor-hover {
+  width: 54px;
+  height: 54px;
+  border-color: var(--color-gold, #c9a84c);
+  background: rgba(201, 168, 76, 0.08);
+}
+
+
 html {
   font-size: 16px;
 }

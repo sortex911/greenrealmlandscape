@@ -20,6 +20,10 @@
 </head>
 <body>
 
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
@@ -649,6 +653,73 @@
         if (e.key === 'Escape') close();
         if (e.key === 'ArrowLeft') prev();
         if (e.key === 'ArrowRight') next();
+      });
+    })();
+  </script>
+
+  <script>
+    // ===== CUSTOM CURSOR =====
+    (function() {
+      // Disable on touch/mobile
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+
+      const dot  = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+
+      // Hide default cursor site-wide
+      document.documentElement.style.cursor = 'none';
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX  = mouseX;
+      let ringY  = mouseY;
+
+      // Track mouse
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Dot follows instantly
+        gsap.set(dot, { x: mouseX, y: mouseY });
+      });
+
+      // Smooth ring with lag
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        gsap.set(ring, { x: ringX, y: ringY });
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      // Show cursor when entering window
+      document.addEventListener('mouseenter', () => {
+        gsap.to([dot, ring], { opacity: 1, duration: 0.3 });
+      });
+      document.addEventListener('mouseleave', () => {
+        gsap.to([dot, ring], { opacity: 0, duration: 0.3 });
+      });
+
+      // Hover on interactive elements
+      const hoverTargets = 'a, button, img, .ongoing-slider-item, .services-premium-card, .news-card, .team-card';
+      document.querySelectorAll(hoverTargets).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          dot.classList.add('cursor-hover');
+          ring.classList.add('cursor-hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          dot.classList.remove('cursor-hover');
+          ring.classList.remove('cursor-hover');
+        });
+      });
+
+      // Click effect
+      document.addEventListener('mousedown', () => {
+        gsap.to(dot,  { scale: 0.5, duration: 0.1, ease: 'power2.in' });
+        gsap.to(ring, { scale: 0.75, duration: 0.1, ease: 'power2.in' });
+      });
+      document.addEventListener('mouseup', () => {
+        gsap.to(dot,  { scale: 1, duration: 0.3, ease: 'elastic.out(1.5, 0.5)' });
+        gsap.to(ring, { scale: 1, duration: 0.3, ease: 'elastic.out(1.5, 0.5)' });
       });
     })();
   </script>
