@@ -1,0 +1,36 @@
+:root {
+  /* Color Palette */
+  --color-green-dark: #0A2213;
+  --color-green-primary: #1F4529;
+  --color-green-light: #476A2F;
+  --color-beige: #E8E4D9;
+  --color-beige-light: #F4F2EC;
+  --color-charcoal: #1A1A1A;
+  --color-gold: #D4AF37;
+  --color-white: #FFFFFF;
+
+  /* Typography */
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Playfair Display', serif;
+
+  /* Spacing */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  /* Transitions */
+  --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.3s ease;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+  --shadow-medium: 0 20px 40px rgba(0,0,0,0.1);
+  --shadow-heavy: 0 30px 60px rgba(0,0,0,0.15);
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(16px);
+}
