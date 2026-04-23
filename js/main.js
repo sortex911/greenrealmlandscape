@@ -500,11 +500,10 @@ function initOngoingProjectsAnimation() {
       x: () => -getScrollAmount(),
       ease: "none",
       scrollTrigger: {
-        trigger: ".ongoing-wrapper",
-        start: "top top",
+        trigger: ongoingSection,
+        start: "center center",
         end: () => `+=${getScrollAmount()}`,
         pin: true,
-        animation: track,
         scrub: 1,
         invalidateOnRefresh: true
       }
